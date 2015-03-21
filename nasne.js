@@ -59,6 +59,21 @@ Nasne.prototype = {
           }
         }
       });
+  },
+  getHddVolumeSize: function(callback) {
+    this.getHddInfo(function(hddInfo) {
+      var free, used, total;
+      free = hddInfo.reduce(function(prev, current) {
+        return prev + current.freeVolumeSize;
+      }, 0);
+      used = hddInfo.reduce(function(prev, current) {
+        return prev + current.usedVolumeSize;
+      }, 0);
+      total = hddInfo.reduce(function(prev, current) {
+        return prev + current.totalVolumeSize;
+      }, 0);
+      callback({'free': free, 'used': used, 'total': total});
+    });
   }
 }
 

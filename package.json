@@ -1,0 +1,19 @@
+{
+  "name": "nasne",
+  "version": "0.0.0",
+  "description": "Get Nasne information",
+  "main": "nasne.js",
+  "dependencies": {
+    "request": "*",
+    "q": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naokiy/node-nasne.git"
+  },
+  "author": "naokiy",
+  "bugs": {
+    "url": "https://github.com/naokiy/node-nasne/issues"
+  },
+  "homepage": "https://github.com/naokiy/node-nasne"
+}

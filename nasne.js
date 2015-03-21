@@ -11,7 +11,10 @@ var DefaultOptions = {
   additional_hdd: false
 };
 
-var Nasne = function(args) {
+var Nasne = function(ip, args) {
+  if (!ip) {
+    throw new Error('IP not defined');
+  }
   var args = args || {};
   var options = DefaultOptions;
   this.options = {};
@@ -34,6 +37,9 @@ var getUrlObject = function(args) {
 
 Nasne.prototype = {
   getHddInfo: function(callback) {
+    if (!callback || typeof(callback) !== 'function') {
+      throw new Error('callback not defined');
+    }
     var hddIds = (this.options['additional_hdd']? [0,1]: [0]);
     Q.all(hddIds.map(this._deferredGetHddInfoByHddId.bind(this))).then(callback);
   },
@@ -43,6 +49,9 @@ Nasne.prototype = {
     return d.promise;
   },
   getHddInfoByHddId: function(hddId, callback) {
+    if (!callback || typeof(callback) !== 'function') {
+      throw new Error('callback not defined');
+    }
     var requestUrl = url.format(getUrlObject({
       hostname: this.options['ip'],
       pathname: '/status/HDDInfoGet',
@@ -61,6 +70,9 @@ Nasne.prototype = {
       });
   },
   getHddVolumeSize: function(callback) {
+    if (!callback || typeof(callback) !== 'function') {
+      throw new Error('callback not defined');
+    }
     this.getHddInfo(function(hddInfo) {
       var free, used, total;
       free = hddInfo.reduce(function(prev, current) {

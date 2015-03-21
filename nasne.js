@@ -15,6 +15,7 @@ var Nasne = function(ip, args) {
   if (!ip) {
     throw new Error('IP not defined');
   }
+  this.ip = ip;
   var args = args || {};
   var options = DefaultOptions;
   this.options = {};
@@ -53,7 +54,7 @@ Nasne.prototype = {
       throw new Error('callback not defined');
     }
     var requestUrl = url.format(getUrlObject({
-      hostname: this.options['ip'],
+      hostname: this.ip,
       pathname: '/status/HDDInfoGet',
       query: {'id': hddId}
     }));

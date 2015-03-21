@@ -2,10 +2,7 @@
   "name": "node-nasne",
   "version": "0.0.0",
   "description": "Get Nasne information",
-  "main": "nasne.js",
-  "scripts": {
-    "test": "node test/test"
-  },
+  "main": "nasne.js",:
   "repository": {
     "type": "git",
     "url": "https://github.com/naokiy/node-nasne.git"

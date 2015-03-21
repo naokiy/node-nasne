@@ -4,8 +4,21 @@
 
 node.jsからnasneのJSON APIを叩いて、HDD残容量などを管理したい。
 
-## 実装予定
+## 使用例
 
-gethddinfo()
+```js
+var Nasne = require('./nasne.js');
 
-HDDの使用状況を返すやつ
+// nasneのIPを指定
+var nasne = new Nasne({ip: '192.168.11.5'});
+
+nasne.getHddInfo(function(hddInfo) {
+  console.log(hddInfo[0].freeVolumeSize);
+});
+
+var nasneWithHdd = new Nasne({ip: '192.168.11.5', additional_hdd: true});
+
+nasneWithHdd.getHddInfo(function(hddInfo) {
+  console.log(hddInfo[0].freeVolumeSize + hddInfo[1].freeVolumeSize);
+});
+```

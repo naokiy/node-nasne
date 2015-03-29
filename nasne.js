@@ -1,4 +1,6 @@
-var DefaultOptions = {
+var _ = require('lodash');
+
+var defaultOptions = {
   additional_hdd: false
 };
 
@@ -6,13 +8,8 @@ var Nasne = function(ip, args) {
   if (!ip) {
     throw new Error('IP not defined');
   }
-  var args = args || {};
-  var options = DefaultOptions;
-  for (var key in args) {
-    options[key] = args[key];
-  }
+  this._options = _.defaults(args || {}, defaultOptions);
   this._ip = ip;
-  this._options = options;
 };
 
 require('./bin/box_status_list.js')(Nasne);

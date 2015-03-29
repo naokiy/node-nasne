@@ -1,8 +1,13 @@
 var request = require('request'),
+    _       = require('lodash'),
     getUrl  = require('../lib/nasne_json_url.js');
 
+var defaultOptions = {
+  withDescriptionLong: 1
+};
+
 module.exports = function(Nasne) {
-  Nasne.prototype.getChannelInfo2 = function(tuningInfo, callback) {
+  Nasne.prototype.getChannelInfo2 = function(tuningInfo, options, callback) {
     if (!tuningInfo) {
       throw new Error('tuning info not defined');
     }
@@ -15,20 +20,24 @@ module.exports = function(Nasne) {
     if (!tuningInfo.serviceId) {
       throw new Error('service id not defined');
     }
+
+    if (typeof (options) == 'function') {
+      callback = options;
+      options = {};
+    }
+
     if (!callback || typeof (callback) !== 'function') {
       throw new Error('callback not defined');
     }
-    var withDescriptionLong = 1;
 
     var requestUrl = getUrl({
       hostname: this._ip,
       pathname: '/status/channelInfoGet2',
-      query: {
+      query: _.defaults({
         'serviceId': tuningInfo.serviceId,
         'transportStreamId': tuningInfo.transportStreamId,
-        'networkId': tuningInfo.networkId,
-        'withDescriptionLong': withDescriptionLong
-      }
+        'networkId': tuningInfo.networkId
+      }, options, defaultOptions)
     });
     request({
       url: requestUrl,

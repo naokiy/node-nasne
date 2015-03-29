@@ -23,7 +23,7 @@ module.exports = function(Nasne) {
     var requestUrl = getUrl({
       hostname: this._ip,
       pathname: '/schedule/reservedListGet',
-      query: defaultOptions
+      query: _.defaults(options || {}, defaultOptions)
     });
     request({
       url: requestUrl,

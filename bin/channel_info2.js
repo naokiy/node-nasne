@@ -1,24 +1,19 @@
 var request = require('request'),
-    getUrl  = require('../lib/nasne_url.js');
+    getUrl  = require('../lib/nasne_json_url.js');
 
-var ChannelInfo2 = function(ip, options) {
-  this.ip = ip;
-  this.options = options;
-};
-
-ChannelInfo2.prototype = {
-  get: function(tuningInfo, callback) {
+module.exports = function(Nasne) {
+  Nasne.prototype.getChannelInfo2 = function(tuningInfo, callback) {
     if (!tuningInfo) {
-      throw new Error('tuning info is needed');
+      throw new Error('tuning info not defined');
     }
     if (!tuningInfo.networkId) {
-      throw new Error('network id is needed');
+      throw new Error('network id not defined');
     }
     if (!tuningInfo.transportStreamId) {
-      throw new Error('transport stream id is needed');
+      throw new Error('transport stream id not defined');
     }
     if (!tuningInfo.serviceId) {
-      throw new Error('service id is needed');
+      throw new Error('service id not defined');
     }
     if (!callback || typeof (callback) !== 'function') {
       throw new Error('callback not defined');
@@ -26,7 +21,7 @@ ChannelInfo2.prototype = {
     var withDescriptionLong = 1;
 
     var requestUrl = getUrl({
-      hostname: this.ip,
+      hostname: this._ip,
       pathname: '/status/channelInfoGet2',
       query: {
         'serviceId': tuningInfo.serviceId,
@@ -40,13 +35,15 @@ ChannelInfo2.prototype = {
       json: true
       },
       function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-          if (callback) {
-            callback(body.channel);
-          }
+        if (error) {
+          throw error;
+        }
+        if (response.statusCode != 200) {
+          throw new Error('HTTP : ' + response.statusCode);
+        }
+        if (callback) {
+          callback(body.channel);
         }
       });
-  }
+  };
 };
-
-module.exports = ChannelInfo2;

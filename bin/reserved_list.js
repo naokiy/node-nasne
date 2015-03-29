@@ -1,14 +1,29 @@
 var request = require('request'),
     getUrl  = require('../lib/nasne_json_url.js');
 
+var defaultOptions = {
+  searchCriteria: 0,
+  filter: 0,
+  startingIndex: 0,
+  requestedCount: 0,
+  sortCriteria: 0,
+  withDescriptionLong: 1,
+  withUserData: 0
+};
+
 module.exports = function(Nasne) {
-  Nasne.prototype.getBoxStatusList = function(callback) {
+  Nasne.prototype.getReservedList = function(options, callback) {
+    if (typeof options == 'function') {
+      callback = options;
+      options = {};
+    }
     if (!callback || typeof (callback) !== 'function') {
       throw new Error('callback not defined');
     }
     var requestUrl = getUrl({
       hostname: this._ip,
-      pathname: '/status/boxStatusListGet'
+      pathname: '/schedule/reservedListGet',
+      query: defaultOptions
     });
     request({
       url: requestUrl,
@@ -25,11 +40,5 @@ module.exports = function(Nasne) {
           callback(body);
         }
       });
-  };
-
-  Nasne.prototype.isRecording = function(callback) {
-    this.getBoxStatusList(function(data) {
-      callback(data.tvTimerInfoStatus.nowId !== '');
-    });
   };
 };

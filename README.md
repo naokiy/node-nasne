@@ -62,7 +62,7 @@ nasne.getHDDVolumeSize(console.log);
 |/status/EPGVersionInfoGet|GET|???|64210|EPGの何か???| - |
 |/status/eventRelayInfoGet|GET|JSON|64210|???| - |
 |/status/HDDInfoGet|GET|JSON|64210|HDDの情報を取得|OK|
-|/status/HDDListGet|GET|JSON|64210|HDDの一覧を取得| - |
+|/status/HDDListGet|GET|JSON|64210|HDDの一覧を取得|OK|
 |/status/HDDPowerSavingModeGet|GET|JSON|64210|???| - |
 |/status/isFinishSetup|GET|JSON|64210|???| - |
 |/status/NASInfoGet|GET|JSON|64210|???| - |

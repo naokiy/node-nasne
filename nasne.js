@@ -1,7 +1,6 @@
 var _ = require('lodash');
 
 var defaultOptions = {
-  additional_hdd: false
 };
 
 var Nasne = function(ip, args) {

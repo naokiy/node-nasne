@@ -12,15 +12,8 @@ var Nasne = require('./nasne.js');
 // nasneのIPを指定
 var nasne = new Nasne('192.168.11.5');
 
-nasne.getHddInfo(function(hddInfo) {
-  console.log(hddInfo[0].freeVolumeSize);
-});
-
-// HDDが追加されているとき
-var nasneWithHdd = new Nasne('192.168.11.5', {additional_hdd: true});
-
-nasneWithHdd.getHddInfo(function(hddInfo) {
-  console.log(hddInfo[0].freeVolumeSize + hddInfo[1].freeVolumeSize);
+// HDDの容量を取得
+nasne.getHDDVolumeSize(console.log);
 });
 ```
 
@@ -69,7 +62,7 @@ nasneWithHdd.getHddInfo(function(hddInfo) {
 |/status/EPGVersionInfoGet|GET|???|64210|EPGの何か???| - |
 |/status/eventRelayInfoGet|GET|JSON|64210|???| - |
 |/status/HDDInfoGet|GET|JSON|64210|HDDの情報を取得|OK|
-|/status/HDDListGet|GET|JSON|64210|HDDの一覧を取得| - |
+|/status/HDDListGet|GET|JSON|64210|HDDの一覧を取得|OK|
 |/status/HDDPowerSavingModeGet|GET|JSON|64210|???| - |
 |/status/isFinishSetup|GET|JSON|64210|???| - |
 |/status/NASInfoGet|GET|JSON|64210|???| - |

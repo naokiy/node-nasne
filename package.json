@@ -5,7 +5,7 @@
   "main": "nasne.js",
   "dependencies": {
     "request": "*",
-    "q": "*",
+    "bluebird": "*",
     "lodash": "*"
   },
   "repository": {

@@ -14,7 +14,6 @@ var nasne = new Nasne('192.168.11.5');
 
 // HDDの容量を取得
 nasne.getHDDVolumeSize(console.log);
-});
 ```
 
 ## メモ

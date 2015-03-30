@@ -5,7 +5,8 @@
   "main": "nasne.js",
   "dependencies": {
     "request": "*",
-    "q": "*"
+    "q": "*",
+    "lodash": "*"
   },
   "repository": {
     "type": "git",

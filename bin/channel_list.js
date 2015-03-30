@@ -2,13 +2,19 @@ var request = require('request'),
     getUrl  = require('../lib/nasne_json_url.js');
 
 module.exports = function(Nasne) {
-  Nasne.prototype.getBoxStatusList = function(callback) {
+  Nasne.prototype.getChannelList = function(broadcastingType, callback) {
+    if (!broadcastingType) {
+      throw new Error('broadcastingType not defined');
+    }
     if (!callback || typeof (callback) !== 'function') {
       throw new Error('callback not defined');
     }
     var requestUrl = getUrl({
       hostname: this._ip,
-      pathname: '/status/boxStatusListGet'
+      pathname: '/status/channelListGet',
+      query: {
+        'broadcastingType': broadcastingType
+      }
     });
     request({
       url: requestUrl,
@@ -22,14 +28,13 @@ module.exports = function(Nasne) {
           throw new Error('HTTP : ' + response.statusCode);
         }
         if (callback) {
-          callback(body);
+          callback(body.channel);
         }
       });
   };
-
-  Nasne.prototype.isRecording = function(callback) {
-    this.getBoxStatusList(function(data) {
-      callback(data.tvTimerInfoStatus.nowId !== '');
-    });
+  Nasne.BroadcastingType = {
+    DTTV: 2,
+    BS: 3,
+    CS: 4
   };
 };

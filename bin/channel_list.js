@@ -28,7 +28,7 @@ module.exports = function(Nasne) {
           throw new Error('HTTP : ' + response.statusCode);
         }
         if (callback) {
-          callback(body.channel);
+          callback(body);
         }
       });
   };

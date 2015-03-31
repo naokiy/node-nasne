@@ -1,4 +1,5 @@
 var request = require('request'),
+    _       = require('lodash'),
     getUrl  = require('../lib/nasne_json_url.js');
 
 var defaultOptions = {
